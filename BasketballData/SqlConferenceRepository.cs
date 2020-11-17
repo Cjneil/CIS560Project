@@ -37,7 +37,7 @@ namespace PersonData
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Person.RetrieveConferenceStandings", connection))
+                using (var command = new SqlCommand("Basketball.RetrieveConferenceStandings", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
@@ -59,10 +59,10 @@ namespace PersonData
 
          while (reader.Read())
          {
-            conferences.Add(new Conference(
-               reader.GetInt32(conferenceIdOrdinal),
-               reader.GetString(nameOrdinal),
-               reader.GetString(nicknameOrdinal)
+                conferences.Add(new Conference(
+                   reader.GetInt32(conferenceIdOrdinal),
+                   reader.GetString(nameOrdinal),
+                   reader.GetString(nicknameOrdinal)));
          }
 
          return conferences;
