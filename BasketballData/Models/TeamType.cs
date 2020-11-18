@@ -2,7 +2,7 @@
 {
    public enum TeamType
    {
-      Home = 0,
+      Home = 2,
       Away = 1
    }
 }
