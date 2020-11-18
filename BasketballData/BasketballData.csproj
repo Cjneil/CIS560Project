@@ -43,6 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConferenceRepository.cs" />
+    <Compile Include="IGamePlayerRepository.cs" />
+    <Compile Include="IGameRepository.cs" />
+    <Compile Include="IGameTeamRepository.cs" />
+    <Compile Include="IPlayerRepository.cs" />
+    <Compile Include="ISeasonRepository.cs" />
     <Compile Include="ITeamRepository.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GamePlayer.cs" />
@@ -54,6 +59,11 @@
     <Compile Include="Models\Conference.cs" />
     <Compile Include="RecordNotFoundException.cs" />
     <Compile Include="SqlConferenceRepository.cs" />
+    <Compile Include="SqlGamePlayerRepository.cs" />
+    <Compile Include="SqlGameRepository.cs" />
+    <Compile Include="SqlGameTeamRepository.cs" />
+    <Compile Include="SqlPlayerRepository.cs" />
+    <Compile Include="SqlSeasonRepository.cs" />
     <Compile Include="SqlTeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,7 +71,7 @@
     <EmbeddedResource Include="Sql\Tables\DropTables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Sql\Procedures\Basketball.RetrieveTeam.sql" />
+    <EmbeddedResource Include="Sql\Procedures\Basketball.RetrieveTeams.sql" />
     <EmbeddedResource Include="Sql\Procedures\Basketball.DisplayConferenceStandings.sql" />
     <EmbeddedResource Include="Sql\Procedures\Basketball.CreateSeason.sql" />
   </ItemGroup>
@@ -75,7 +85,7 @@
     <EmbeddedResource Include="Sql\Tables\Basketball.Season.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Sql\Data\Basketball.TeamType.sql" />
+    <EmbeddedResource Include="Sql\Tables\Basketball.TeamType.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Sql\Schemas\Basketball.sql" />
@@ -100,6 +110,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Sql\Procedures\Basketball.CreateTeam.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\Data\Basketball.TestData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
