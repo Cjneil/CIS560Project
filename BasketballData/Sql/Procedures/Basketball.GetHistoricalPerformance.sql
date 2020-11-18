@@ -2,115 +2,31 @@
 	@TeamName1 NVARCHAR(50),
 	@TeamName2 NVARCHAR(50)
 AS
-SELECT DISTINCT T.Name,
-	SUM(CASE WHEN GT.TeamScore >
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN 1
-			WHEN GT.TeamScore >
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN 1
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) AS Wins,
-
-	SUM(CASE WHEN GT.TeamScore <
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN 1
-			WHEN GT.TeamScore <
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN 1
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) AS Losses,
-
-		CAST(SUM(CASE WHEN GT.TeamScore >
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN 1
-			WHEN GT.TeamScore >
-				(SELECT GTM.TeamScore
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN 1
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) AS FLOAT(3)) / 
-		SUM(CASE WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN 1
-			WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN 1
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) AS WinPercentage,
-
-		CAST(SUM(CASE WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN GT.TeamScore
-			WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN GT.TeamScore
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) AS FLOAT(3)) /
-			SUM(CASE WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN 1
-			WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN 1
-			ELSE 0
-			END) OVER(PARTITION BY GT.TeamId) 
-			AS AveragePoints--,
-	--G.Date
-FROM Basketball.Team T 
-	INNER JOIN Basketball.GameTeam GT ON T.TeamId = GT.TeamId
-	INNER JOIN Basketball.Game G ON GT.GameId = G.GameId
-WHERE (T.Name = @TeamName1 OR T.Name = @TeamName2) AND 
-			-- There is a game between TeamName1 and TeamName2
-			(CASE WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName2
-				) THEN GT.TeamScore
-			WHEN GT.TeamId <>
-				(SELECT GTM.TeamId
-				FROM Basketball.GameTeam GTM
-					INNER JOIN Basketball.Team TM ON GTM.TeamId = TM.TeamId
-				WHERE GTM.GameId = GT.GameId AND TM.Name = @TeamName1
-				) THEN GT.TeamScore
-			ELSE 0
-		END > 0)
-ORDER BY Wins DESC
+WITH TeamCTE(TeamId, Name, Wins, GameCount, TotalPoints) 
+AS 
+(
+	SELECT T.TeamId, T.Name,
+	SUM(CASE
+		WHEN GT.TeamScore > GT2.TeamScore THEN 1
+		ELSE 0
+	END) AS Wins,
+	COUNT(*) AS GameCount,
+	SUM(GT.TeamScore) AS TotalPoints
+	FROM Basketball.Team T
+		INNER JOIN Basketball.GameTeam GT ON T.TeamId = GT.TeamId
+		INNER JOIN Basketball.GameTeam GT2 ON GT2.GameId = GT.GameId
+			AND GT2.TeamId <> GT.TeamId
+		INNER JOIN Basketball.Team O ON GT2.TeamId = O.TeamId
+	WHERE (T.Name = @TeamName1 AND O.Name = @TeamName2) OR (O.Name = @TeamName1 AND T.Name = @TeamName2)
+	GROUP BY T.TeamId, T.Name
+) 
+SELECT T.TeamId, T.Name, T.Wins, T.GameCount - T.Wins AS Losses, 
+	1.0 * T.Wins / T.GameCount AS WinPercentage, 
+	1.0 * T.TotalPoints / T.GameCount AS AveragePoints
+FROM TeamCTE T
+ORDER BY WinPercentage DESC
 GO
+
+--EXEC Basketball.GetHistoricalPerformances @TeamName1 = N'University of Kansas', @TeamName2 = N'Baylor University'
+
 	

@@ -2,30 +2,31 @@
 	@ConferenceNickname NVARCHAR(10),
 	@YearRange NVARCHAR(10)
 AS
-SELECT DISTINCT T.Name, C.Nickname, S.YearRange,
-	SUM(IIF(GT.TeamScore > 
-			(SELECT GTM.TeamScore
-			FROM Basketball.GameTeam GTM
-			WHERE GTM.TeamId <> GT.TeamID AND GTM.GameId = GT.GameId
-		), 1, 0
-	)) OVER(Partition by GT.TeamId, S.SeasonId ORDER BY GT.TeamId) AS Wins,
-	SUM(IIF(GT.TeamScore < 
-			(SELECT GTM.TeamScore
-			FROM Basketball.GameTeam GTM
-			WHERE GTM.TeamId <> GT.TeamID AND GTM.GameId = GT.GameId
-		), 1, 0
-	)) OVER(Partition by GT.TeamId, S.SeasonId ORDER BY GT.TeamId) AS Losses,
-	CAST(CAST(SUM(IIF(GT.TeamScore > 
-			(SELECT GTM.TeamScore
-			FROM Basketball.GameTeam GTM
-			WHERE GTM.TeamId <> GT.TeamID AND GTM.GameId = GT.GameId
-		), 1, 0
-	)) OVER(Partition by GT.TeamId, S.SeasonId ORDER BY GT.TeamId) AS DECIMAL(4,3)) / COUNT(GT.GameId) OVER(PARTITION BY T.TeamId) AS DECIMAL(4, 3)) AS WinPercentage
-FROM Basketball.GameTeam GT
-	INNER JOIN Basketball.Team T ON GT.TeamId = T.TeamId
-	INNER JOIN Basketball.Conference C ON T.ConferenceId = C.ConferenceId
-	INNER JOIN Basketball.Game G ON G.GameId = GT.GameId
-	INNER JOIN Basketball.Season S ON S.SeasonId = G.SeasonId
-WHERE C.Nickname = @ConferenceNickname AND S.YearRange = @YearRange
-ORDER BY Wins DESC
+WITH ConferenceCTE(TeamName, Wins, GameCount) 
+AS 
+(
+	SELECT T.Name,
+	SUM(CASE
+		WHEN GT.TeamScore > GT2.TeamScore THEN 1
+		ELSE 0
+	END) AS Wins,
+	COUNT(*) AS GameCount
+	FROM Basketball.Conference C
+		INNER JOIN Basketball.Team T ON C.ConferenceId = T.ConferenceId
+		INNER JOIN Basketball.GameTeam GT ON T.TeamId = GT.TeamId
+		INNER JOIN Basketball.GameTeam GT2 ON GT2.GameId = GT.GameId
+			AND GT2.TeamId <> GT.TeamId
+		INNER JOIN Basketball.Team O ON GT2.TeamId = O.TeamId
+		INNER JOIN Basketball.Conference OC ON O.ConferenceId = OC.ConferenceId
+		INNER JOIN Basketball.Game G ON GT.GameId = G.GameId
+		INNER JOIN Basketball.Season S ON G.SeasonId = S.SeasonId
+	WHERE C.Nickname = @ConferenceNickname AND OC.Nickname = @ConferenceNickname AND S.YearRange = @YearRange
+	GROUP BY T.TeamId, T.Name
+) 
+SELECT C.TeamName, C.Wins, C.GameCount - C.Wins AS Losses, 
+	1.0 * C.Wins / C.GameCount AS WinPercentage
+FROM ConferenceCTE C
+ORDER BY WinPercentage DESC
 GO
+
+--EXEC Basketball.DisplayConferenceStandings @ConferenceNickName = N'Big 12', @YearRange = N'2019-20'
