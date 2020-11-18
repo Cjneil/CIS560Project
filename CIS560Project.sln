@@ -7,13 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CIS560Project", "CIS560Proj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28FC06E8-E6C4-4D50-A0CE-68DC3BE3344B}"
 	ProjectSection(SolutionItems) = preProject
-		Scripts\CreateDatabase.ps1 = Scripts\CreateDatabase.ps1
-		Scripts\CreateDatabase.sql = Scripts\CreateDatabase.sql
-		Scripts\DropDatabase.ps1 = Scripts\DropDatabase.ps1
 		Scripts\RebuildDatabase.ps1 = Scripts\RebuildDatabase.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketballData", "BasketballData\BasketballData.csproj", "{D51AA58C-05B9-4A7D-9F80-CCEBF8A0EAF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{9667FB37-5515-41EE-9917-D335F55A9DCE}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\CreateDatabase.ps1 = Scripts\CreateDatabase.ps1
+		Scripts\CreateDatabase.sql = Scripts\CreateDatabase.sql
+		Scripts\DropDatabase.ps1 = Scripts\DropDatabase.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9667FB37-5515-41EE-9917-D335F55A9DCE} = {28FC06E8-E6C4-4D50-A0CE-68DC3BE3344B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0C054E0-D576-457E-A125-BC1D37A7649E}

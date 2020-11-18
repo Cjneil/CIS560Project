@@ -43,16 +43,17 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Basketball
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Tables\Basketball.GameTeam.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Tables\Basketball.GamePlayer.sql"
 
-Write-Host "Stored procedures..."
+
+<#Write-Host "Stored procedures..."
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.CreatePerson.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.RetrievePersons.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.FetchPerson.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.GetPersonByEmail.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.SavePersonAddress.sql"
-Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.RetrieveAddressesForPerson.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Procedures\Person.RetrieveAddressesForPerson.sql"#>
 
 Write-Host "Inserting data..."
-Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "PersonData\Sql\Data\Person.AddressType.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Data\Basketball.TestData.sql"
 
 Write-Host "Rebuild completed."
 Write-Host ""
