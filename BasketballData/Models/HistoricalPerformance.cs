@@ -14,8 +14,9 @@ namespace BasketballData.Models
         public int Losses { get; }
         public double WinPercentage { get; }
         public double AveragePoints { get; }
+        public double AveragePointsOpp { get; }
 
-        internal HistoricalPerformance(int teamId, string name, int wins, int losses, double winPercentage, double averagePoints)
+        internal HistoricalPerformance(int teamId, string name, int wins, int losses, double winPercentage, double averagePoints, double averagePointsOpp)
         {
             TeamId = teamId;
             TeamName = name;
@@ -23,6 +24,7 @@ namespace BasketballData.Models
             Losses = losses;
             WinPercentage = Math.Round(winPercentage, 2);
             AveragePoints = Math.Round(averagePoints, 2);
+            AveragePointsOpp = Math.Round(averagePointsOpp, 2);
         }
     }
 }

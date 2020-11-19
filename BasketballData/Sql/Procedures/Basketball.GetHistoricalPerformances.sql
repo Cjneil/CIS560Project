@@ -2,7 +2,7 @@
 	@TeamName1 NVARCHAR(50),
 	@TeamName2 NVARCHAR(50)
 AS
-WITH TeamCTE(TeamId, Name, Wins, GameCount, TotalPoints) 
+WITH TeamCTE(TeamId, Name, Wins, GameCount, TotalPoints, TotalPointsOpp) 
 AS 
 (
 	SELECT T.TeamId, T.Name,
@@ -11,7 +11,8 @@ AS
 		ELSE 0
 	END) AS Wins,
 	COUNT(*) AS GameCount,
-	SUM(GT.TeamScore) AS TotalPoints
+	SUM(GT.TeamScore) AS TotalPoints,
+	SUM(GT.TeamScore) AS TotalPointsOpp
 	FROM Basketball.Team T
 		INNER JOIN Basketball.GameTeam GT ON T.TeamId = GT.TeamId
 		INNER JOIN Basketball.GameTeam GT2 ON GT2.GameId = GT.GameId
@@ -22,7 +23,8 @@ AS
 ) 
 SELECT T.TeamId as TeamId, T.Name as Name, T.Wins as Wins, T.GameCount - T.Wins AS Losses, 
 	1.0 * T.Wins / T.GameCount AS WinPercentage, 
-	1.0 * T.TotalPoints / T.GameCount AS AveragePoints
+	1.0 * T.TotalPoints / T.GameCount AS AveragePoints,
+	1.0 * T.TotalPointsOpp / T.GameCount AS AveragePointsOpp
 FROM TeamCTE T
 ORDER BY WinPercentage DESC
 GO

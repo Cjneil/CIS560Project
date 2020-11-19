@@ -22,7 +22,7 @@ namespace BasketballData
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Basketball.GetHistoricalPerformance", connection))
+                using (var command = new SqlCommand("Basketball.GetHistoricalPerformances", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("TeamName1", team1);
@@ -44,6 +44,7 @@ namespace BasketballData
             var lossesOrdinal = reader.GetOrdinal("Losses");
             var percentOrdinal = reader.GetOrdinal("WinPercentage");
             var averageOrdinal = reader.GetOrdinal("AveragePoints");
+            var averageOppOrdinal = reader.GetOrdinal("AveragePointsOpp");
 
             if (!reader.Read())
                 return null;
@@ -53,8 +54,9 @@ namespace BasketballData
                reader.GetString(nameOrdinal),
                reader.GetInt32(winsOrdinal),
                reader.GetInt32(lossesOrdinal),
-               (double) reader.GetSqlSingle(percentOrdinal),
-               (double) reader.GetSqlSingle(averageOrdinal)
+               (double) reader.GetDecimal(percentOrdinal),
+               (double) reader.GetDecimal(averageOrdinal),
+               (double) reader.GetDecimal(averageOppOrdinal)
                );
         }
     }

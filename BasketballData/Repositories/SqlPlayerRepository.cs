@@ -49,6 +49,25 @@ namespace BasketballData
                 }
             }
         }
+        public IReadOnlyList<Player> GetPlayerStatsInRange(string first, string last, DateTime start, DateTime end)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("Basketball.GetPlayerStatsInRange", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("FirstName", first);
+                    command.Parameters.AddWithValue("LastName", last);
+                    command.Parameters.AddWithValue("DateStart", start.Date);
+                    command.Parameters.AddWithValue("DateEnd", end.Date);
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                        return TranslatePlayersStats(reader);
+                }
+            }
+        }
 
         public IReadOnlyList<PlayerRecord> GetPlayerRecords(string nickname, string statistic, int amount)
         {
@@ -69,12 +88,13 @@ namespace BasketballData
             }
         }
 
+
         private IReadOnlyList<Player> TranslatePlayers(SqlDataReader reader)
         {
             var players = new List<Player>();
 
             var playerIdOrdinal = reader.GetOrdinal("PlayerId");
-            var teamIdOrdinal = reader.GetOrdinal("TeamId");
+            var teamNameOrdinal = reader.GetOrdinal("Name");
             var firstName = reader.GetOrdinal("FirstName");
             var lastName = reader.GetOrdinal("LastName");
             var position = reader.GetOrdinal("Position");
@@ -83,7 +103,7 @@ namespace BasketballData
             {
                 players.Add(new Player(
                    reader.GetInt32(playerIdOrdinal),
-                   reader.GetInt32(teamIdOrdinal),
+                   reader.GetString(teamNameOrdinal),
                    reader.GetString(firstName),
                    reader.GetString(lastName),
                    reader.GetString(position)));

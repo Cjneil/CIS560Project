@@ -4,7 +4,7 @@
 	@DateStart DATE,
 	@DateEnd DATE
 AS
-SELECT DISTINCT T.Name AS TeamName, P.FirstName, P.LastName, 
+SELECT DISTINCT T.Name AS TeamName, P.FirstName, P.LastName, P.Position,
 	CAST(SUM(GP.Minutes) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS MinutesPerGame, 
 	CAST(SUM(GP.Points) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS PointsPerGame, 
 	CAST(SUM(GP.Assists) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS AssistsPerGame, 

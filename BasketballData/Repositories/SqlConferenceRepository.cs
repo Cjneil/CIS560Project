@@ -82,7 +82,7 @@ namespace BasketballData
                    reader.GetString(teamNameOrdinal),
                    reader.GetInt32(winsOrdinal),
                    reader.GetInt32(lossesOrdinal),
-                   reader.GetDouble(percentOrdinal)));
+                   (double) reader.GetDecimal(percentOrdinal)));
             }
 
             return conferences;

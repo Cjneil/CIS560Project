@@ -80,12 +80,12 @@
   <ItemGroup>
     <Content Include="Sql\Data\Basketball.TestData.sql" />
     <Content Include="Sql\Procedures\Basketball.GetPlayerStatsInRange.sql" />
-    <Content Include="Sql\Procedures\Basketball.GetTeamNameById.sql" />
     <Content Include="Sql\Procedures\Basketball.GetConferenceStandings.sql" />
-    <Content Include="Sql\Procedures\Basketball.GetHistoricalPerformance.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetHistoricalPerformances.sql" />
     <Content Include="Sql\Procedures\Basketball.GetPlayerStats.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveConferences.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveGames.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveSeasons.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveTeams.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrievePlayers.sql" />
     <Content Include="Sql\Procedures\Basketball.ShowPlayerRecordsLeaderboard.sql" />

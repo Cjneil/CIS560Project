@@ -15,53 +15,6 @@ namespace BasketballData
       {
          this.connectionString = connectionString;
       }
-
-      public Team CreateTeam(int conferenceId, string name, string mascot, string city, string state)
-      {
-         // Verify parameters.
-         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("The parameter cannot be null or empty.", nameof(name));
-
-         if (string.IsNullOrWhiteSpace(mascot))
-            throw new ArgumentException("The parameter cannot be null or empty.", nameof(mascot));
-
-         if (string.IsNullOrWhiteSpace(city))
-            throw new ArgumentException("The parameter cannot be null or empty.", nameof(city));
-
-         if (string.IsNullOrWhiteSpace(city))
-            throw new ArgumentException("The parameter cannot be null or empty.", nameof(state));
-
-            // Save to database.
-            using (var transaction = new TransactionScope())
-         {
-            using (var connection = new SqlConnection(connectionString))
-            {
-               using (var command = new SqlCommand("Basketball.CreateTeam", connection))
-               {
-                  command.CommandType = CommandType.StoredProcedure;
-
-                  command.Parameters.AddWithValue("ConferenceId", conferenceId);
-                  command.Parameters.AddWithValue("Name", name);
-                  command.Parameters.AddWithValue("Mascot", mascot);
-                  command.Parameters.AddWithValue("City", city);
-                  command.Parameters.AddWithValue("State", state);
-
-                  var p = command.Parameters.Add("TeamId", SqlDbType.Int);
-                  p.Direction = ParameterDirection.Output;
-
-                  connection.Open();
-
-                  command.ExecuteNonQuery();
-
-                  transaction.Complete();
-
-                  var teamId = (int)command.Parameters["TeamId"].Value;
-
-                  return new Team(teamId, conferenceId, name, mascot, city, state);
-               }
-            }
-         }
-      }
       
         /// <summary>
         /// gets team with the name input
@@ -84,24 +37,6 @@ namespace BasketballData
                   return TranslateTeam(reader);
             }
          }
-      }
-
-      public string GetTeamNameById(int id)
-      {
-            using (var connection = new SqlConnection(connectionString))
-            {
-                using (var command = new SqlCommand("Basketball.GetTeamNameById", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("TeamId", id);
-
-                    connection.Open();
-
-                    using (var reader = command.ExecuteReader())
-                        return reader.GetString(reader.GetOrdinal("Name"));
-                }
-            }
       }
 
       public IReadOnlyList<Team> RetrieveTeams()

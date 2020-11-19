@@ -1,73 +1,157 @@
 ﻿@page
 @model IndexModel
+@using BasketballData.Models 
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the College Basketball Data Project</h1>
+    <p>By Connor Neil and Matthew Schwartz</p>
 </div>
 
 <form>
-    <label>
-        Conference:
-        <select name="conferenceNickname">
-            @foreach(BasketballData.Models.Conference conference in Model.Conferences)
-            {
-                <option>@conference.Nickname</option>
-            }
-        </select>
-    </label>
+    <div>
+        <label>
+            Conference:
+            <select name="conferenceNickname">
+                <option></option>
+                @foreach (BasketballData.Models.Conference conference in Model.Conferences)
+                {
+                    <option value="@conference.Nickname">@conference.Nickname</option>
+                }
+            </select>
+            Season:
+            <select name="seasonChoice">
+                <option></option>
+                @foreach (Season season in Model.Seasons)
+                {
+                    <option value="@season.YearRange">@season.YearRange</option>
+                }
+            </select>
+        </label>
 
-    <input type="submit" name="submitConferenceStandings" value="View Conference Standings" />
+        <input type="submit" name="submitConferenceStandings" value="View Conference Standings"/>
+        <table class="players-list">
+            @if (Model.ConferenceStandings != null)
+            {
+                <tr>
+                    <th>Team Name</th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Win Percentage</th>
+                </tr>
+                @foreach (ConferenceStanding standing in @Model.ConferenceStandings)
+                {
+                    <tr>
+                        <td>@standing.TeamName</td>
+                        <td>@standing.Wins</td>
+                        <td>@standing.Losses</td>
+                        <td>@standing.WinPercentage</td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
 </form>
-
-
 <form>
-    <label>
-        Team 1:
-        <select name="team1Name">
-            @foreach (BasketballData.Models.Team team in Model.Teams)
-            {
-                <option>@team.Name</option>
-            }
-        </select>
-    </label>
+    <div>
+        <label>
+            Team 1:
+            <select name="team1Name">
+                @foreach (Team team in Model.Teams)
+                {
+                    <option>@team.Name</option>
+                }
+            </select>
+        </label>
 
-    <label>
-        Team 2:
-        <select name="team2Name">
-            @foreach (BasketballData.Models.Team team in Model.Teams)
-            {
-                <option>@team.Name</option>
-            }
-        </select>
-    </label>
+        <label>
+            Team 2:
+            <select name="team2Name">
+                @foreach (Team team in Model.Teams)
+                {
+                    <option>@team.Name</option>
+                }
+            </select>
+        </label>
 
-    <input type="submit" name="submitHeadToHead" value="View Head-to-Head Stats" />
+        <input type="submit" name="submitHeadToHead" value="View Head-to-Head Stats" />
+        <table>
+            @if (Model.Performance != null)
+            {
+                <tr>
+                    <th>Team Name</th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Win Percentage</th>
+                    <th>Average Points</th>
+                    <th>Average Points Opponent</th>
+                </tr>
+                    <tr>
+                        <td>@Model.Performance.TeamName</td>
+                        <td>@Model.Performance.Wins</td>
+                        <td>@Model.Performance.Losses</td>
+                        <td>@Model.Performance.WinPercentage</td>
+                        <td>@Model.Performance.AveragePoints</td>
+                        <td>@Model.Performance.AveragePointsOpp</td>
+
+                    </tr>
+            }
+        </table>
+    </div>
 </form>
-
 <form>
-    <label>
-        First Name:
-        <input type="text" name="playerFirstName" />
-    </label>
-
-    <label>
-        Last Name:
-        <input type="text" name="playerLastName" />
-    </label>
-
-    <label>
-        Start Date:
-        <input type="date" name="startDate" />
-    </label>
-
-    <label>
-        End Date:
-        <input type="date" name="endDate" />
-    </label>
-
-    <input type="submit" name="submitPlayerStats" value="View Player Stats" />
+    <div>
+        <label>
+            First Name:
+            <input type="text" name="playerFirstName"/>
+        </label>
+        <label>
+            Last Name:
+            <input type="text" name="playerLastName"/>
+        </label>
+        <label>
+            Start Date:
+            <input type="date" name="startDate"/>
+        </label>
+        <label>
+            End Date:
+            <input type="date" name="endDate"/>
+        </label>
+        <input type="submit" name="submitPlayerStats" value="View Player Stats" />
+        <table class="players-list">
+            @if (Model.PlayerStats != null)
+            {
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>MPG</th>
+                    <th>PPG</th>
+                    <th>APG</th>
+                    <th>RPG</th>
+                    <th>SPG</th>
+                    <th>TPG</th>
+                </tr>
+                @foreach (Player player in @Model.PlayerStats)
+                {
+                    <tr class="player-entry">
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@player.TeamName</td>
+                        <td>@player.Position</td>
+                        <td>@player.MinutesPerGame</td>
+                        <td>@player.PointsPerGame</td>
+                        <td>@player.AssistsPerGame</td>
+                        <td>@player.ReboundsPerGame</td>
+                        <td>@player.StealsPerGame</td>
+                        <td>@player.TurnoversPerGame</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
 </form>

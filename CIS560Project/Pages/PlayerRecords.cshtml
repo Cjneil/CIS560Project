@@ -74,6 +74,15 @@
                         <th>Team</th>
                         <th>Position</th>
                     </tr>
+                    @foreach (Player player in @Model.Players)
+                    {
+                        <tr class="player-entry">
+                            <td>@player.FirstName</td>
+                            <td>@player.LastName</td>
+                            <td>@player.TeamName</td>
+                            <td>@player.Position</td>
+                        </tr>
+                    }
                 }
             </table>
         </div>

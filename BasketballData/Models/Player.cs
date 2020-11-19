@@ -9,8 +9,6 @@ namespace BasketballData.Models
     public class Player
     {
         public int PlayerId { get; }
-        public int TeamId { get; }
-
         public string TeamName { get; }
         public string FirstName { get; }
         public string LastName { get; }
@@ -23,10 +21,10 @@ namespace BasketballData.Models
         public double StealsPerGame { get; }
         public double TurnoversPerGame { get; }
 
-        internal Player(int playerId, int teamId, string firstName, string lastName, string position)
+        internal Player(int playerId, string teamName, string firstName, string lastName, string position)
         {
             PlayerId = playerId;
-            TeamId = teamId;
+            TeamName = teamName;
             FirstName = firstName;
             LastName = lastName;
             Position = position;
