@@ -84,7 +84,7 @@
     <Content Include="Sql\Procedures\Basketball.GetPlayerStats.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveConferences.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveGames.sql" />
-    <Content Include="Sql\Procedures\Basketball.RetrieveTeam.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveTeams.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrievePlayers.sql" />
     <Content Include="Sql\Procedures\Basketball.ShowPlayerRecordsLeaderboard.sql" />
     <Content Include="Sql\Schemas\Basketball.sql" />

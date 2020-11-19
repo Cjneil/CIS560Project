@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE Basketball.CreateGame
+CREATE OR ALTER PROCEDURE Basketball.GetTeamNameById
    @TeamId INT
 AS
 

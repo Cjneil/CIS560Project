@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE Basketball.GetPlayerStats
+﻿CREATE OR ALTER PROCEDURE Basketball.GetPlayerStatsInRange
 	@FirstName NVARCHAR(20),
 	@LastName NVARCHAR(20),
 	@DateStart DATE,

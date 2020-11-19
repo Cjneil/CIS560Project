@@ -1,6 +1,6 @@
-﻿CREATE OR ALTER PROCEDURE Basketball.RetrievePlayers
+﻿CREATE OR ALTER PROCEDURE Basketball.RetrieveGames
 AS
 
-SELECT P.PlayerId, P.TeamId, P.FirstName, P.LastName, P.Position
-FROM Basketball.Player P;
+SELECT G.GameId as GameId, G.SeasonId as SeasonId, G.Neutral as Neutral, G.Date as Date
+FROM Basketball.Game G;
 GO
