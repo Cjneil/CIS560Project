@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BasketballData;
+using BasketballData.Models;
 
 namespace CIS560Project.Pages
 {
@@ -18,9 +19,20 @@ namespace CIS560Project.Pages
             _logger = logger;
         }
 
+
+        public SqlConferenceRepository conferenceRepository = new SqlConferenceRepository("");
+
+        public IEnumerable<Conference> Conferences { get; set; }
+
+        public SqlTeamRepository teamRepository = new SqlTeamRepository("");
+
+        public IEnumerable<Team> Teams { get; set; }
+
+
         public void OnGet()
         {
-
+            Conferences = conferenceRepository.RetrieveConferences();
+            Teams = teamRepository.RetrieveTeams();
         }
     }
 }

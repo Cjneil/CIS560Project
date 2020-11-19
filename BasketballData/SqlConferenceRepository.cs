@@ -6,7 +6,7 @@ using System.Transactions;
 using BasketballData;
 using BasketballData.Models;
 
-namespace PersonData
+namespace BasketballData
 {
    public class SqlConferenceRepository : IConferenceRepository
    {

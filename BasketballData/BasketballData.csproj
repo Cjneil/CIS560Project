@@ -47,6 +47,7 @@
     <Compile Include="IGameRepository.cs" />
     <Compile Include="IGameTeamRepository.cs" />
     <Compile Include="IPlayerRepository.cs" />
+    <Compile Include="IReportsRepository.cs" />
     <Compile Include="ISeasonRepository.cs" />
     <Compile Include="ITeamRepository.cs" />
     <Compile Include="Models\Game.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Models\TeamType.cs" />
     <Compile Include="Models\Conference.cs" />
     <Compile Include="RecordNotFoundException.cs" />
+    <Compile Include="SqlReportsRepository.cs" />
     <Compile Include="SqlConferenceRepository.cs" />
     <Compile Include="SqlGamePlayerRepository.cs" />
     <Compile Include="SqlGameRepository.cs" />
@@ -111,7 +113,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Sql\Procedures\Basketball.CreateTeam.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Sql\Procedures\Basketball.ShowConferenceStatisticLeaderboard.sql" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Sql\Data\Basketball.TestData.sql" />
   </ItemGroup>

@@ -8,3 +8,97 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<form>
+    <label>
+        Conference:
+        <select name="conferenceNickname">
+            @foreach(BasketballData.Models.Conference conference in Model.Conferences)
+            {
+                <option>@conference.Nickname</option>
+            }
+        </select>
+    </label>
+
+    <input type="submit" name="submitConferenceStandings" value="View Conference Standings" />
+</form>
+
+<form>
+    <label>
+        Conference:
+        <select name="conferenceNickname">
+            @foreach (BasketballData.Models.Conference conference in Model.Conferences)
+            {
+                <option>@conference.Nickname</option>
+            }
+        </select>
+    </label>
+
+    <label>
+        Statistic:
+        <select>
+            <option>Minutes</option>
+            <option>Points</option>
+            <option>Assits</option>
+            <option>Rebounds</option>
+            <option>Steals</option>
+            <option>Blocks</option>
+            <option>Turnovers</option>
+        </select>
+    </label>
+
+    <label>
+        How many players would you like to see?
+        <input type="number" name="topNPlayers" min="0" />
+    </label>
+
+    <input type="submit" name="submitTopNPlayers" value="View Top N Players in a Conference" />
+</form>
+
+<form>
+    <label>
+        Team 1:
+        <select name="team1Name">
+            @foreach (BasketballData.Models.Team team in Model.Teams)
+            {
+                <option>@team.Name</option>
+            }
+        </select>
+    </label>
+
+    <label>
+        Team 2:
+        <select name="team2Name">
+            @foreach (BasketballData.Models.Team team in Model.Teams)
+            {
+                <option>@team.Name</option>
+            }
+        </select>
+    </label>
+
+    <input type="submit" name="submitHeadToHead" value="View Head-to-Head Stats" />
+</form>
+
+<form>
+    <label>
+        First Name:
+        <input type="text" name="playerFirstName" />
+    </label>
+
+    <label>
+        Last Name:
+        <input type="text" name="playerLastName" />
+    </label>
+
+    <label>
+        Start Date:
+        <input type="date" name="startDate" />
+    </label>
+
+    <label>
+        End Date:
+        <input type="date" name="endDate" />
+    </label>
+
+    <input type="submit" name="submitPlayerStats" value="View Player Stats" />
+</form>
