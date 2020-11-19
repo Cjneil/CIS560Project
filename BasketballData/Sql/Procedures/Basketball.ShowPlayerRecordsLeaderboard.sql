@@ -21,4 +21,4 @@ WHERE C.Nickname = @ConferenceNickname
 ORDER BY StatisticChosen DESC
 GO
 
---EXEC Basketball.ShowConferenceStatisticLeaderboard @ConferenceNickname = N'Big 12', @StatisticChosen = N'Points', @TopN = 5
+--EXEC Basketball.ShowPlayerRecordsLeaderboard @ConferenceNickname = N'Big 12', @StatisticChosen = N'Points', @TopN = 5

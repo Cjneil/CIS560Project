@@ -12,7 +12,7 @@ AS
 	END) AS Wins,
 	COUNT(*) AS GameCount,
 	SUM(GT.TeamScore) AS TotalPoints,
-	SUM(GT.TeamScore) AS TotalPointsOpp
+	SUM(GT2.TeamScore) AS TotalPointsOpp
 	FROM Basketball.Team T
 		INNER JOIN Basketball.GameTeam GT ON T.TeamId = GT.TeamId
 		INNER JOIN Basketball.GameTeam GT2 ON GT2.GameId = GT.GameId

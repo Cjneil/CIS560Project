@@ -29,4 +29,4 @@ FROM ConferenceCTE C
 ORDER BY WinPercentage DESC
 GO
 
---EXEC Basketball.DisplayConferenceStandings @ConferenceNickName = N'Big 12', @YearRange = N'2019-20'
+--EXEC Basketball.GetConferenceStandings @ConferenceNickName = N'Big 12', @YearRange = N'2019-20'

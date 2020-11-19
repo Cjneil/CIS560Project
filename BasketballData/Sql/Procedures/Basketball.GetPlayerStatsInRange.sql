@@ -20,4 +20,4 @@ FROM Basketball.Player P
 WHERE G.Date BETWEEN @DateStart AND @DateEnd AND P.FirstName = @FirstName AND P.LastName = @LastName
 GO
 
---EXEC Basketball.GetPlayerStats @FirstName = N'Devon', @LastName = N'Dotson', @DateStart = N'2020-01-01', @DateEnd = N'2020-03-31'
+--EXEC Basketball.GetPlayerStatsInRange @FirstName = N'Devon', @LastName = N'Dotson', @DateStart = N'2020-01-01', @DateEnd = N'2020-03-31'
