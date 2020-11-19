@@ -10,6 +10,7 @@ namespace BasketballData.Models
     {
         public int GameId { get; }
         public int SeasonId { get; }
+        public string SeasonYears { get; }
         public int Neutral { get; }
         public DateTime Date {get;} 
 

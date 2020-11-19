@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using BasketballData;
 using BasketballData.Models;
 
-namespace PersonData
+namespace BasketballData
 {
     public class SqlSeasonRepository : ISeasonRepository
     {
@@ -23,7 +23,7 @@ namespace PersonData
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Person.RetrieveSeasons", connection))
+                using (var command = new SqlCommand("Basketball.RetrieveSeasons", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 

@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D51AA58C-05B9-4A7D-9F80-CCEBF8A0EAF0}</ProjectGuid>
+    <ProjectGuid>{37A2BCF8-6D64-4A91-BF1B-DE39ABFF59B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PersonData</RootNamespace>
-    <AssemblyName>PersonData</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>BasketballData</RootNamespace>
+    <AssemblyName>BasketballData</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -42,82 +42,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IConferenceRepository.cs" />
-    <Compile Include="IGamePlayerRepository.cs" />
-    <Compile Include="IGameRepository.cs" />
-    <Compile Include="IGameTeamRepository.cs" />
-    <Compile Include="IPlayerRepository.cs" />
-    <Compile Include="IReportsRepository.cs" />
-    <Compile Include="ISeasonRepository.cs" />
-    <Compile Include="ITeamRepository.cs" />
+    <Compile Include="Interfaces\IConferenceRepository.cs" />
+    <Compile Include="Interfaces\IConferenceStatisticsRepository.cs" />
+    <Compile Include="Interfaces\IGamePlayerRepository.cs" />
+    <Compile Include="Interfaces\IGameRepository.cs" />
+    <Compile Include="Interfaces\IGameTeamRepository.cs" />
+    <Compile Include="Interfaces\IPlayerRepository.cs" />
+    <Compile Include="Interfaces\IReportsRepository.cs" />
+    <Compile Include="Interfaces\ISeasonRepository.cs" />
+    <Compile Include="Interfaces\ITeamRepository.cs" />
+    <Compile Include="Models\Conference.cs" />
+    <Compile Include="Models\ConferenceStanding.cs" />
+    <Compile Include="Models\PlayerRecord.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GamePlayer.cs" />
-    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\GameTeam.cs" />
+    <Compile Include="Models\HistoricalPerformance.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamType.cs" />
-    <Compile Include="Models\Conference.cs" />
-    <Compile Include="RecordNotFoundException.cs" />
-    <Compile Include="SqlReportsRepository.cs" />
-    <Compile Include="SqlConferenceRepository.cs" />
-    <Compile Include="SqlGamePlayerRepository.cs" />
-    <Compile Include="SqlGameRepository.cs" />
-    <Compile Include="SqlGameTeamRepository.cs" />
-    <Compile Include="SqlPlayerRepository.cs" />
-    <Compile Include="SqlSeasonRepository.cs" />
-    <Compile Include="SqlTeamRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordNotFoundException.cs" />
+    <Compile Include="Repositories\SqlConferenceRepository.cs" />
+    <Compile Include="Repositories\SqlGamePlayerRepository.cs" />
+    <Compile Include="Repositories\SqlGameRepository.cs" />
+    <Compile Include="Repositories\SqlGameTeamRepository.cs" />
+    <Compile Include="Repositories\SqlHistoricalPerformanceRepository.cs" />
+    <Compile Include="Repositories\SqlPlayerRepository.cs" />
+    <Compile Include="Repositories\SqlReportsRepository.cs" />
+    <Compile Include="Repositories\SqlSeasonRepository.cs" />
+    <Compile Include="Repositories\SqlTeamRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\DropTables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Procedures\Basketball.RetrieveTeams.sql" />
-    <EmbeddedResource Include="Sql\Procedures\Basketball.DisplayConferenceStandings.sql" />
-    <EmbeddedResource Include="Sql\Procedures\Basketball.CreateSeason.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.Team.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.Conference.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.Season.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.TeamType.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Schemas\Basketball.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Procedures\Basketball.GetPlayerStats.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Procedures\Basketball.GetHistoricalPerformance.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.Game.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.GameTeam.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.GamePlayer.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Tables\Basketball.Player.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Procedures\Basketball.CreateTeam.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Sql\Procedures\Basketball.ShowConferenceStatisticLeaderboard.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Sql\Data\Basketball.TestData.sql" />
+    <Content Include="Sql\Data\Basketball.TeamType.sql" />
+    <Content Include="Sql\Data\Basketball.TestData.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetPlayerStatsInRange.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetTeamNameById.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetConferenceStandings.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetHistoricalPerformance.sql" />
+    <Content Include="Sql\Procedures\Basketball.GetPlayerStats.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveConferences.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveGames.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveTeam.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrievePlayers.sql" />
+    <Content Include="Sql\Procedures\Basketball.ShowPlayerRecordsLeaderboard.sql" />
+    <Content Include="Sql\Schemas\Basketball.sql" />
+    <Content Include="Sql\Tables\Basketball.Conference.sql" />
+    <Content Include="Sql\Tables\Basketball.Game.sql" />
+    <Content Include="Sql\Tables\Basketball.GamePlayer.sql" />
+    <Content Include="Sql\Tables\Basketball.GameTeam.sql" />
+    <Content Include="Sql\Tables\Basketball.Player.sql" />
+    <Content Include="Sql\Tables\Basketball.Season.sql" />
+    <Content Include="Sql\Tables\Basketball.Team.sql" />
+    <Content Include="Sql\Tables\Basketball.TeamType.sql" />
+    <Content Include="Sql\Tables\DropTables.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

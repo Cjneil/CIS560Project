@@ -69,3 +69,53 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+form#menu-database {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto auto;
+}
+
+#search {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+}
+
+#filters {
+    display: flex;
+    flex-direction: column;
+}
+
+#filters input[type=number] {
+    width: 4rem;
+}
+
+#filters h4 {
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+#search div {
+    margin-bottom: 0.4rem;
+}
+
+html {
+    text-align: center;
+}
+
+table,
+th,
+td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+      
+table,
+th,
+td {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}

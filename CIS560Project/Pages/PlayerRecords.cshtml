@@ -1,0 +1,72 @@
+﻿@page
+@model CIS560Project.Pages.PlayerRecordsModel
+@using BasketballData.Models
+@{
+    ViewData["Title"] = "PlayerHistory";
+}
+
+<h1 class="display-teaminfo">Player Information</h1>
+<form id="menu-database">
+    <div>
+        <label>
+            Conference:
+            <select name="conferenceNickname">
+                @foreach (BasketballData.Models.Conference conference in Model.Conferences)
+                {
+                    <option>@conference.Nickname</option>
+                }
+            </select>
+        </label>
+
+        <label>
+            Statistic:
+            <select name="statistic">
+                <option value="minutes">Minutes</option>
+                <option value="points">Points</option>
+                <option value="assists">Assists</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="steals">Steals</option>
+                <option value="blocks">Blocks</option>
+                <option value="turnovers">Turnovers</option>
+            </select>
+        </label>
+
+        <label>
+            How many players would you like to see?
+            <input type="number" name="playerCount" min="0" />
+        </label>
+
+        <input type="submit" name="submitTopNPlayers" value="View Top N Players in a Conference" />
+    </div>
+    <div class="text-center">
+
+
+        <div class="players">
+            <h2>Players</h2>
+            <table class="players-list">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>Minutes</th>
+                    <th>Points</th>
+                    <th>Assists</th>
+                    <th>Rebounds</th>
+                    <th>Steals</th>
+                    <th>Turnovers</th>
+                </tr>
+                @foreach (PlayerRecord player in @Model.PlayerRecords)
+                {
+                    <tr class="player-entry">
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@player.TeamName</td>
+                        <td>@player.Statistic</td>
+                    </tr>
+                }
+            </table>
+            }
+        </div>
+    </div>
+</form>

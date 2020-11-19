@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonData
+namespace BasketballData
 {
-    public interface IGameTeamRepository
+    public interface IGamePlayerRepository
     {
-        IReadOnlyList<GameTeam> RetrieveGameTeams();
+        IReadOnlyList<GamePlayer> RetrieveGamePlayers();
     }
 }

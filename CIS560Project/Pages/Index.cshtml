@@ -23,37 +23,6 @@
     <input type="submit" name="submitConferenceStandings" value="View Conference Standings" />
 </form>
 
-<form>
-    <label>
-        Conference:
-        <select name="conferenceNickname">
-            @foreach (BasketballData.Models.Conference conference in Model.Conferences)
-            {
-                <option>@conference.Nickname</option>
-            }
-        </select>
-    </label>
-
-    <label>
-        Statistic:
-        <select>
-            <option>Minutes</option>
-            <option>Points</option>
-            <option>Assits</option>
-            <option>Rebounds</option>
-            <option>Steals</option>
-            <option>Blocks</option>
-            <option>Turnovers</option>
-        </select>
-    </label>
-
-    <label>
-        How many players would you like to see?
-        <input type="number" name="topNPlayers" min="0" />
-    </label>
-
-    <input type="submit" name="submitTopNPlayers" value="View Top N Players in a Conference" />
-</form>
 
 <form>
     <label>

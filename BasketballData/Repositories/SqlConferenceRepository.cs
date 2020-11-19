@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Transactions;
-using BasketballData;
 using BasketballData.Models;
 
 namespace BasketballData
@@ -21,7 +19,7 @@ namespace BasketballData
       {
          using (var connection = new SqlConnection(connectionString))
          {
-            using (var command = new SqlCommand("Person.RetrieveTeamsForConference", connection))
+            using (var command = new SqlCommand("Basketball.RetrieveConferences", connection))
             {
                command.CommandType = CommandType.StoredProcedure;
 
@@ -33,24 +31,26 @@ namespace BasketballData
          }
       }
 
-        public IReadOnlyList<Conference> RetrieveConferenceStandings(string nickname, string yearRange)
+        public IReadOnlyList<ConferenceStanding> GetConferenceStandings(string nickname, string yearRange)
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Basketball.RetrieveConferenceStandings", connection))
+                using (var command = new SqlCommand("Basketball.GetConferenceStandings", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.AddWithValue("ConferenceNickname", nickname);
+                    command.Parameters.AddWithValue("YearRange", yearRange);
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
-                        return TranslateConferences(reader);
+                        return TranslateConferenceStandings(reader);
                 }
             }
         }
 
         private IReadOnlyList<Conference> TranslateConferences(SqlDataReader reader)
-      {
+        {
          var conferences = new List<Conference>();
 
          var conferenceIdOrdinal = reader.GetOrdinal("ConferenceId");
@@ -66,6 +66,26 @@ namespace BasketballData
          }
 
          return conferences;
-      }
-   }
+        }
+        private IReadOnlyList<ConferenceStanding> TranslateConferenceStandings(SqlDataReader reader)
+        {
+            var conferences = new List<ConferenceStanding>();
+
+            var teamNameOrdinal = reader.GetOrdinal("TeamName");
+            var winsOrdinal = reader.GetOrdinal("Wins");
+            var lossesOrdinal = reader.GetOrdinal("Losses");
+            var percentOrdinal = reader.GetOrdinal("WinPercentage");
+
+            while (reader.Read())
+            {
+                conferences.Add(new ConferenceStanding(
+                   reader.GetString(teamNameOrdinal),
+                   reader.GetInt32(winsOrdinal),
+                   reader.GetInt32(lossesOrdinal),
+                   reader.GetDouble(percentOrdinal)));
+            }
+
+            return conferences;
+        }
+    }
 }

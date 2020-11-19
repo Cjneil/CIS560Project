@@ -86,6 +86,24 @@ namespace BasketballData
          }
       }
 
+      public string GetTeamNameById(int id)
+      {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("Basketball.GetTeamNameById", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("TeamId", id);
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                        return reader.GetString(reader.GetOrdinal("Name"));
+                }
+            }
+      }
+
       public IReadOnlyList<Team> RetrieveTeams()
       {
          using (var connection = new SqlConnection(connectionString))
@@ -102,10 +120,26 @@ namespace BasketballData
          }
       }
 
+      public IReadOnlyList<Team> RetrieveTeamsByConference(string nickname)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand("Basketball.RetrieveTeamsByConference", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                        return TranslateTeams(reader);
+                }
+            }
+        }
+
       private Team TranslateTeam(SqlDataReader reader)
       {
                
-            var teamIdOrdinal = reader.GetOrdinal("teamId");
+            var teamIdOrdinal = reader.GetOrdinal("TeamId");
          var conferenceIdOrdinal = reader.GetOrdinal("ConferenceId");
          var nameOrdinal = reader.GetOrdinal("Name");
          var mascotOrdinal = reader.GetOrdinal("Mascot");
@@ -129,7 +163,7 @@ namespace BasketballData
       {
          var persons = new List<Team>();
 
-          var teamIdOrdinal = reader.GetOrdinal("teamId");
+          var teamIdOrdinal = reader.GetOrdinal("TeamId");
          var conferenceIdOrdinal = reader.GetOrdinal("ConferenceId");
          var nameOrdinal = reader.GetOrdinal("Name");
          var mascotOrdinal = reader.GetOrdinal("Mascot");

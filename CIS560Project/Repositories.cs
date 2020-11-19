@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonData
+namespace CIS560Project
 {
-    public interface IReportsRepository
+    public class Repositories
     {
-
+        
     }
 }

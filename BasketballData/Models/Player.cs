@@ -10,9 +10,18 @@ namespace BasketballData.Models
     {
         public int PlayerId { get; }
         public int TeamId { get; }
+
+        public string TeamName { get; }
         public string FirstName { get; }
         public string LastName { get; }
         public string Position { get; }
+        public double MinutesPerGame { get; }
+        public double PointsPerGame { get; }
+        public double AssistsPerGame { get; }
+        public double ReboundsPerGame { get; }
+        public double BlocksPerGame { get; }
+        public double StealsPerGame { get; }
+        public double TurnoversPerGame { get; }
 
         internal Player(int playerId, int teamId, string firstName, string lastName, string position)
         {
@@ -21,6 +30,22 @@ namespace BasketballData.Models
             FirstName = firstName;
             LastName = lastName;
             Position = position;
+        }
+        internal Player(int playerId, string teamName, string firstName, string lastName, string position, double minutes,
+            double points, double assists, double rebounds, double steals, double blocks, double turnovers)
+        {
+            PlayerId = playerId;
+            TeamName = teamName;
+            FirstName = firstName;
+            LastName = lastName;
+            Position = position;
+            MinutesPerGame = minutes;
+            PointsPerGame = points;
+            AssistsPerGame = assists;
+            ReboundsPerGame = rebounds;
+            BlocksPerGame = blocks;
+            StealsPerGame = steals;
+            TurnoversPerGame = turnovers;
         }
     }
 }

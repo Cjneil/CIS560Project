@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE Basketball.RetrieveConferenceStandings
+﻿CREATE OR ALTER PROCEDURE Basketball.GetConferenceStandings
 	@ConferenceNickname NVARCHAR(10),
 	@YearRange NVARCHAR(10)
 AS
@@ -23,7 +23,7 @@ AS
 	WHERE C.Nickname = @ConferenceNickname AND OC.Nickname = @ConferenceNickname AND S.YearRange = @YearRange
 	GROUP BY T.TeamId, T.Name
 ) 
-SELECT C.TeamName, C.Wins, C.GameCount - C.Wins AS Losses, 
+SELECT C.TeamName as TeamName, C.Wins As Wins, C.GameCount - C.Wins AS Losses, 
 	1.0 * C.Wins / C.GameCount AS WinPercentage
 FROM ConferenceCTE C
 ORDER BY WinPercentage DESC

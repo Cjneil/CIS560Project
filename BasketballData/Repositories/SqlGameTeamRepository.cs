@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonData
+namespace BasketballData
 {
     public class SqlGameTeamRepository : IGameTeamRepository
     {
@@ -22,7 +22,7 @@ namespace PersonData
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Person.RetrieveGameTeams", connection))
+                using (var command = new SqlCommand("Basketball.RetrieveGameTeams", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 

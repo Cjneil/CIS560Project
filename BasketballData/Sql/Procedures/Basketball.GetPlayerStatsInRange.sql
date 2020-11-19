@@ -1,6 +1,8 @@
 ﻿CREATE OR ALTER PROCEDURE Basketball.GetPlayerStats
 	@FirstName NVARCHAR(20),
-	@LastName NVARCHAR(20)
+	@LastName NVARCHAR(20),
+	@DateStart DATE,
+	@DateEnd DATE
 AS
 SELECT DISTINCT T.Name AS TeamName, P.FirstName, P.LastName, 
 	CAST(SUM(GP.Minutes) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS MinutesPerGame, 
@@ -15,7 +17,7 @@ FROM Basketball.Player P
 	INNER JOIN Basketball.GameTeam GT ON GP.TeamId = GT.TeamId AND GT.GameTeamId = GP.GameTeamId
 	INNER JOIN Basketball.Game G ON GT.GameId = G.GameId
 	INNER JOIN Basketball.Team T ON T.TeamId = P.TeamId
-WHERE P.FirstName = @FirstName AND P.LastName = @LastName
+WHERE G.Date BETWEEN @DateStart AND @DateEnd AND P.FirstName = @FirstName AND P.LastName = @LastName
 GO
 
-
+--EXEC Basketball.GetPlayerStats @FirstName = N'Devon', @LastName = N'Dotson', @DateStart = N'2020-01-01', @DateEnd = N'2020-03-31'

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonData
+namespace BasketballData
 {
     public interface IGameRepository
     {
