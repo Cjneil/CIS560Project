@@ -96,7 +96,6 @@ namespace BasketballData
         {
             var players = new List<Player>();
 
-            var playerIdOrdinal = reader.GetOrdinal("PlayerId");
             var teamNameOrdinal = reader.GetOrdinal("TeamName");
             var firstName = reader.GetOrdinal("FirstName");
             var lastName = reader.GetOrdinal("LastName");
@@ -112,7 +111,6 @@ namespace BasketballData
             while (reader.Read())
             {
                 players.Add(new Player(
-                   reader.GetInt32(playerIdOrdinal),
                    reader.GetString(teamNameOrdinal),
                    reader.GetString(firstName),
                    reader.GetString(lastName),

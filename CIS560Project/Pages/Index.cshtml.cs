@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace CIS560Project.Pages
 
         public SqlHistoricalPerformanceRepository matchupRepository = new SqlHistoricalPerformanceRepository(@"Server=(localdb)\MSSQLLocalDb;Database=560Project;Integrated Security=SSPI;");
 
-        public HistoricalPerformance performance { get; set; }
+        public HistoricalPerformance Performance { get; set; }
         public IEnumerable<Team> Teams { get; set; }
 
 

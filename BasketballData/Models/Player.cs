@@ -31,10 +31,9 @@ namespace BasketballData.Models
             LastName = lastName;
             Position = position;
         }
-        internal Player(int playerId, string teamName, string firstName, string lastName, string position, double minutes,
+        internal Player(string teamName, string firstName, string lastName, string position, double minutes,
             double points, double assists, double rebounds, double steals, double blocks, double turnovers)
         {
-            PlayerId = playerId;
             TeamName = teamName;
             FirstName = firstName;
             LastName = lastName;

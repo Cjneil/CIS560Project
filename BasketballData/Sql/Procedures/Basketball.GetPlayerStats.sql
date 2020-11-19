@@ -1,8 +1,6 @@
 ﻿CREATE OR ALTER PROCEDURE Basketball.GetPlayerStats
-	@FirstName NVARCHAR(20),
-	@LastName NVARCHAR(20)
 AS
-SELECT DISTINCT T.Name AS TeamName, P.FirstName, P.LastName, 
+SELECT DISTINCT T.Name AS TeamName, P.FirstName, P.LastName, P.Position,
 	CAST(SUM(GP.Minutes) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS MinutesPerGame, 
 	CAST(SUM(GP.Points) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS PointsPerGame, 
 	CAST(SUM(GP.Assists) OVER(PARTITION BY P.PlayerId) AS FLOAT(3)) / COUNT(GP.PlayerId) OVER(PARTITION BY GP.PlayerId) AS AssistsPerGame, 
@@ -15,7 +13,6 @@ FROM Basketball.Player P
 	INNER JOIN Basketball.GameTeam GT ON GP.TeamId = GT.TeamId AND GT.GameTeamId = GP.GameTeamId
 	INNER JOIN Basketball.Game G ON GT.GameId = G.GameId
 	INNER JOIN Basketball.Team T ON T.TeamId = P.TeamId
-WHERE P.FirstName = @FirstName AND P.LastName = @LastName
 GO
 
 

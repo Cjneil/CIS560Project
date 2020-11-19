@@ -2,7 +2,7 @@
 @model CIS560Project.Pages.PlayerRecordsModel
 @using BasketballData.Models
 @{
-    ViewData["Title"] = "PlayerHistory";
+    ViewData["Title"] = "PlayerRecords";
 }
 
 <h1 class="display-teaminfo">Player Information</h1>
@@ -56,7 +56,7 @@
                     <th>Steals</th>
                     <th>Turnovers</th>
                 </tr>
-                @foreach (PlayerRecord player in @Model.PlayerRecords)
+                @if(Model.PlayerRecords != null) foreach (PlayerRecord player in Model.PlayerRecords)
                 {
                     <tr class="player-entry">
                         <td>@player.FirstName</td>
@@ -66,7 +66,6 @@
                     </tr>
                 }
             </table>
-            }
         </div>
     </div>
 </form>

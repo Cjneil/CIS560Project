@@ -84,7 +84,7 @@ form#menu-database {
 
 #filters {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 #filters input[type=number] {
