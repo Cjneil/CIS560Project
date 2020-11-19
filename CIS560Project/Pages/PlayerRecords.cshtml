@@ -5,9 +5,9 @@
     ViewData["Title"] = "PlayerRecords";
 }
 
-<h1 class="display-teaminfo">Player Information</h1>
+<h1 class="display-teaminfo">Player Records</h1>
 <form id="menu-database">
-    <div>
+    <div id="filters">
         <label>
             Conference:
             <select name="conferenceNickname">
@@ -21,13 +21,13 @@
         <label>
             Statistic:
             <select name="statistic">
-                <option value="minutes">Minutes</option>
-                <option value="points">Points</option>
-                <option value="assists">Assists</option>
-                <option value="rebounds">Rebounds</option>
-                <option value="steals">Steals</option>
-                <option value="blocks">Blocks</option>
-                <option value="turnovers">Turnovers</option>
+                <option value="Minutes">Minutes</option>
+                <option value="Points">Points</option>
+                <option value="Assists">Assists</option>
+                <option value="Rebounds">Rebounds</option>
+                <option value="Steals">Steals</option>
+                <option value="Blocks">Blocks</option>
+                <option value="Turnovers">Turnovers</option>
             </select>
         </label>
 
@@ -36,7 +36,7 @@
             <input type="number" name="playerCount" min="0" />
         </label>
 
-        <input type="submit" name="submitTopNPlayers" value="View Top N Players in a Conference" />
+        <input type="submit" name="submitTopNPlayers" value="View player records" />
     </div>
     <div class="text-center">
 
@@ -44,25 +44,35 @@
         <div class="players">
             <h2>Players</h2>
             <table class="players-list">
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>Minutes</th>
-                    <th>Points</th>
-                    <th>Assists</th>
-                    <th>Rebounds</th>
-                    <th>Steals</th>
-                    <th>Turnovers</th>
-                </tr>
-                @if(Model.PlayerRecords != null) foreach (PlayerRecord player in Model.PlayerRecords)
+                @if (Model.Statistic != null)
                 {
-                    <tr class="player-entry">
-                        <td>@player.FirstName</td>
-                        <td>@player.LastName</td>
-                        <td>@player.TeamName</td>
-                        <td>@player.Statistic</td>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Team</th>
+                        <th>Position</th>
+                        <th>@Model.Statistic</th>
+                    </tr>
+                    int i = 1;
+                    if (Model.PlayerRecords != null) foreach (PlayerRecord player in Model.PlayerRecords)
+                        {
+                            <tr class="player-entry">
+                                <td>@i</td>
+                                <td>@player.FirstName</td>
+                                <td>@player.LastName</td>
+                                <td>@player.TeamName</td>
+                                <td>@player.Statistic</td>
+                            </tr>
+                            i++;
+                        }
+                }
+                else
+                {
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Team</th>
+                        <th>Position</th>
                     </tr>
                 }
             </table>

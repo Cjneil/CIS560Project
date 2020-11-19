@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE Basketball.ShowConferenceStatisticLeaderboard
+CREATE OR ALTER PROCEDURE Basketball.ShowPlayerRecordsLeaderboard
 	@ConferenceNickname NVARCHAR(50),
 	@StatisticChosen NVARCHAR(15),
 	@TopN INT

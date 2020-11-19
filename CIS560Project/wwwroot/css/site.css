@@ -1,5 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+* {
+    text-align: center;
+    margin: auto;
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -82,9 +86,10 @@ form#menu-database {
     text-align: center;
 }
 
-#filters {
+#filters > * {
     display: flex;
-    flex-direction: row;
+    flex-direction:column;
+    text-align:left;
 }
 
 #filters input[type=number] {
@@ -100,9 +105,6 @@ form#menu-database {
     margin-bottom: 0.4rem;
 }
 
-html {
-    text-align: center;
-}
 
 table,
 th,

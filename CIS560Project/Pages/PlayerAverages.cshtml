@@ -6,13 +6,16 @@
 }
 
 <h1>Player Information</h1>
+<p>
+    On this page you will find information regarding all players in the league regarding their name and position. These can be filtered using the below forms, at this time you can only search you using one of the below options at a time.
+    The lowest option filled will be prioritized.
+</p>
 <form id="menu-database">
     <div id="filters">
-        <p>
-            On this page you will find information regarding all players in the league regarding their name and position. These can be filtered using the below forms, at this time you can only search you using one of the below options at a time.
-            The lowest option filled will be prioritized.
-        </p>
-        <p>If you would like to search by name, please enter the name below</p>
+        <div>
+        <label>If you would like to search by name, please enter the name below</label>
+        </div>
+        
         <div id="name-search">
             <label>Name:</label>
             <input type="text" name="SearchTerms" value="@Model.SearchTerms" />

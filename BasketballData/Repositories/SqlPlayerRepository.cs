@@ -115,13 +115,13 @@ namespace BasketballData
                    reader.GetString(firstName),
                    reader.GetString(lastName),
                    reader.GetString(position),
-                   reader.GetDouble(mpg),
-                   reader.GetDouble(ppg),
-                   reader.GetDouble(apg),
-                   reader.GetDouble(rbg),
-                   reader.GetDouble(spg),
-                   reader.GetDouble(bpg),
-                   reader.GetDouble(tpg)
+                   (double) reader.GetSqlSingle(mpg),
+                   (double) reader.GetSqlSingle(ppg),
+                   (double) reader.GetSqlSingle(apg),
+                   (double) reader.GetSqlSingle(rbg),
+                   (double) reader.GetSqlSingle(spg),
+                   (double) reader.GetSqlSingle(bpg),
+                   (double) reader.GetSqlSingle(tpg)
                    ));
             }
 
@@ -132,10 +132,10 @@ namespace BasketballData
         {
             var players = new List<PlayerRecord>();
 
-            var teamNameOrdinal = reader.GetOrdinal("TeamName");
+            var teamNameOrdinal = reader.GetOrdinal("Name");
             var firstName = reader.GetOrdinal("FirstName");
             var lastName = reader.GetOrdinal("LastName");
-            var statistic = reader.GetOrdinal("Statistic");
+            var statistic = reader.GetOrdinal("StatisticChosen");
 
             while (reader.Read())
             {

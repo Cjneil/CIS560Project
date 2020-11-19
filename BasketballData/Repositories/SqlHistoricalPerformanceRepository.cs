@@ -53,8 +53,8 @@ namespace BasketballData
                reader.GetString(nameOrdinal),
                reader.GetInt32(winsOrdinal),
                reader.GetInt32(lossesOrdinal),
-               reader.GetDouble(percentOrdinal),
-               reader.GetDouble(averageOrdinal)
+               (double) reader.GetSqlSingle(percentOrdinal),
+               (double) reader.GetSqlSingle(averageOrdinal)
                );
         }
     }
