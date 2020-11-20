@@ -18,14 +18,14 @@ namespace BasketballData
             this.connectionString = connectionString;
         }
 
-        public IReadOnlyList<GameTeam> RetrieveGameTeams()
+        public IReadOnlyList<GameTeam> RetrieveGameTeams(string team)
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand("Basketball.RetrieveGameTeams", connection))
+                using (var command = new SqlCommand("Basketball.RetrieveAllGameTeamsForATeam", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-
+                    command.Parameters.AddWithValue("TeamName", team);
                     connection.Open();
 
                     using (var reader = command.ExecuteReader())
@@ -38,20 +38,22 @@ namespace BasketballData
         {
             var gameTeams = new List<GameTeam>();
 
-            var gameTeamIdOrdinal = reader.GetOrdinal("GameTeamId");
-            var gameIdOrdinal = reader.GetOrdinal("GameId");
-            var teamIdOrdinal = reader.GetOrdinal("TeamId");
-            var teamTypeId = reader.GetOrdinal("TeamTypeId");
-            var teamScore = reader.GetOrdinal("TeamScore");
+            var dateOrdinal = reader.GetOrdinal("Date");
+            var teamNameOrdinal = reader.GetOrdinal("Name");
+            var teamScoreOrdinal = reader.GetOrdinal("TeamScore");
+            var oppNameOrdinal = reader.GetOrdinal("OpponentName");
+            var oppScoreOrdinal = reader.GetOrdinal("OpponentScore");
+            var teamTypeOrdinal = reader.GetOrdinal("TeamTypeId");
 
             while (reader.Read())
             {
                 gameTeams.Add(new GameTeam(
-                   reader.GetInt32(gameTeamIdOrdinal),
-                   reader.GetInt32(gameIdOrdinal),
-                   reader.GetInt32(teamIdOrdinal),
-                   reader.GetInt32(teamTypeId),
-                   reader.GetInt32(teamScore)
+                   reader.GetDateTime(dateOrdinal),
+                   reader.GetInt32(teamScoreOrdinal),
+                   reader.GetString(teamNameOrdinal),
+                   reader.GetInt32(oppScoreOrdinal),
+                   reader.GetString(oppNameOrdinal),
+                   reader.GetInt32(teamTypeOrdinal)
                    ));
             }
 

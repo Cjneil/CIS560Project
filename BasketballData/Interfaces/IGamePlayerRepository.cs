@@ -9,6 +9,6 @@ namespace BasketballData
 {
     public interface IGamePlayerRepository
     {
-        IReadOnlyList<GamePlayer> RetrieveGamePlayers();
+        IReadOnlyList<GamePlayer> RetrieveGamePlayers(string first, string last);
     }
 }

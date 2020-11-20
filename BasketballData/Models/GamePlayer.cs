@@ -8,9 +8,9 @@ namespace BasketballData.Models
 {
     public class GamePlayer
     {
-        public int PlayerId { get; }
-        public int GameTeamId { get; }
-        public int TeamId { get; }
+        public DateTime Date { get; }
+        public string TeamName { get; }
+        public string OppTeamName { get; }
         public int Minutes { get; }
         public int Points { get; }
         public int Assists { get; }
@@ -19,11 +19,11 @@ namespace BasketballData.Models
         public int Blocks { get; }
         public int Turnovers { get; }
 
-        internal GamePlayer(int playerId, int gameTeamId, int teamId, int minutes, int points, int assists, int rebounds, int steals, int blocks, int turnovers)
+        internal GamePlayer(DateTime date, string teamName, string oppTeamName, int minutes, int points, int assists, int rebounds, int steals, int blocks, int turnovers)
         {
-            PlayerId = playerId;
-            GameTeamId = gameTeamId;
-            TeamId = teamId;
+            Date = date;
+            TeamName = teamName;
+            OppTeamName = oppTeamName;
             Minutes = minutes;
             Points = points;
             Assists = assists;

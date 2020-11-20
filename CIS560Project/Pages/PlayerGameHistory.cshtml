@@ -1,0 +1,62 @@
+﻿@page
+@model CIS560Project.Pages.PlayerGameHistoryModel
+@using BasketballData.Models
+@{
+    ViewData["Title"] = "PlayerGameHistory";
+}
+
+<h1 class="display-teaminfo">Player Game History</h1>
+<form id="menu-database">
+    <div id="filters">
+        <div>
+            <label>This page can be used to search for a player's game history</label>
+        </div>
+
+        <div id="name-search">
+            <label>First Name:</label>
+            <input type="text" name="firstName" />
+            <label>Last Name:</label>
+            <input type="text" name="lastName" />
+        </div>
+        <input type="submit" name="submitPlayerSearch" value="Search for player" />
+    </div>
+    <div class="text-center">
+        <div class="records">
+
+            <h2>@(Model.FirstName + " " + Model.LastName)</h2>
+            @if (Model.Games != null)
+            {
+                <table>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Team</th>
+                        <th>Opponent</th>
+                        <th>Minutes</th>
+                        <th>Points</th>
+                        <th>Assists</th>
+                        <th>Rebounds</th>
+                        <th>Steals</th>
+                        <th>Blocks</th>
+                        <th>Turnovers</th>
+                    </tr>
+                    @foreach (GamePlayer game in Model.Games)
+                    {
+                        <tr>
+                            <td>@game.Date.ToShortDateString()</td>
+                            <td>@game.TeamName</td>
+                            <td>@game.OppTeamName</td>
+                            <td>@game.Minutes</td>
+                            <td>@game.Points</td>
+                            <td>@game.Assists</td>
+                            <td>@game.Rebounds</td>
+                            <td>@game.Steals</td>
+                            <td>@game.Blocks</td>
+                            <td>@game.Turnovers</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</form>

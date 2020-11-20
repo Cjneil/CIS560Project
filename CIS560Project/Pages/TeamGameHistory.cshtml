@@ -1,0 +1,50 @@
+﻿@page
+@model CIS560Project.Pages.TeamGameHistoryModel
+@using BasketballData.Models
+@{
+    ViewData["Title"] = "TeamGameHistory";
+}
+
+<h1 class="display-teaminfo">Team Game History</h1>
+<form id="menu-database">
+    <div id="filters">
+        <div>
+            <label>This page can be used to search for a team's game history</label>
+        </div>
+        <div id="name-search">
+            <label>Team:</label>
+            <input type="text" name="team" />
+        </div>
+        <input type="submit" name="submitTeamSearch" value="Search for team" />
+    </div>
+    <div class="text-center">
+        <div class="records">
+            <h2>@Model.Team</h2>
+            @if (Model.Games != null)
+            {
+                <table>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Team</th>
+                        <th>Location</th>
+                        <th>Opponent</th>
+                        <th>Score</th>
+                        <th>Opponent Score</th>
+                    </tr>
+                    @foreach (GameTeam game in Model.Games)
+                    {
+                        <tr>
+                            <td>@game.Date.ToShortDateString()</td>
+                            <td>@game.TeamName</td>
+                            <td>@game.TeamType</td>
+                            <td>@game.OpponentName</td>
+                            <td>@game.TeamScore</td>
+                            <td>@game.OpponentScore</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</form>

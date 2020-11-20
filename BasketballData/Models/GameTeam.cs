@@ -8,19 +8,24 @@ namespace BasketballData.Models
 {
     public class GameTeam
     {
-        public int GameTeamId { get; }
-        public int GameId { get; }
-        public int TeamId { get; }
-        public int TeamTypeId { get; }
+        public DateTime Date { get; }
+        public string TeamName { get; }
+        public string OpponentName { get; }
+        public string TeamType { get; }
         public int TeamScore { get; }
+        public int OpponentScore { get; }
 
-        internal GameTeam(int gameTeamId, int gameId, int teamId, int teamTypeId, int teamScore)
+        internal GameTeam(DateTime date, int teamScore,string teamName, int oppScore, string oppName, int teamTypeId)
         {
-            GameTeamId = gameTeamId;
-            GameId = gameId;
-            TeamId = teamId;
-            TeamTypeId = teamTypeId;
+            Date = date;
             TeamScore = teamScore;
+            TeamName = teamName;
+            OpponentScore = oppScore;
+            OpponentName = oppName;
+            if (teamTypeId == 1)
+                TeamType = "Away";
+            else
+                TeamType = "Home";
         }
     }
 }
