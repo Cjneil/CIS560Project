@@ -83,6 +83,8 @@
     <Content Include="Sql\Procedures\Basketball.GetConferenceStandings.sql" />
     <Content Include="Sql\Procedures\Basketball.GetHistoricalPerformances.sql" />
     <Content Include="Sql\Procedures\Basketball.GetPlayerStats.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveAllGamePlayersForAPlayer.sql" />
+    <Content Include="Sql\Procedures\Basketball.RetrieveAllGameTeamsForATeam.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveConferences.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveGames.sql" />
     <Content Include="Sql\Procedures\Basketball.RetrieveSeasons.sql" />

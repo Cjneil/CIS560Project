@@ -18,7 +18,7 @@ AS
 		INNER JOIN Basketball.GameTeam GT2 ON GT2.GameId = GT.GameId
 			AND GT2.TeamId <> GT.TeamId
 		INNER JOIN Basketball.Team O ON GT2.TeamId = O.TeamId
-	WHERE (T.Name = @TeamName1 AND O.Name = @TeamName2) OR (O.Name = @TeamName1 AND T.Name = @TeamName2)
+	WHERE (T.Name = @TeamName1 AND O.Name = @TeamName2)
 	GROUP BY T.TeamId, T.Name
 ) 
 SELECT T.TeamId as TeamId, T.Name as Name, T.Wins as Wins, T.GameCount - T.Wins AS Losses, 
