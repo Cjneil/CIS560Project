@@ -2,10 +2,10 @@
 	@TeamName1 NVARCHAR(50),
 	@TeamName2 NVARCHAR(50)
 AS
-WITH TeamCTE(TeamId, Name, Wins, GameCount, TotalPoints, TotalPointsOpp) 
+WITH TeamCTE(TeamId, Name, OppName, Wins, GameCount, TotalPoints, TotalPointsOpp) 
 AS 
 (
-	SELECT T.TeamId, T.Name,
+	SELECT T.TeamId, T.Name, O.Name as OppName,
 	SUM(CASE
 		WHEN GT.TeamScore > GT2.TeamScore THEN 1
 		ELSE 0
@@ -21,7 +21,7 @@ AS
 	WHERE (T.Name = @TeamName1 AND O.Name = @TeamName2)
 	GROUP BY T.TeamId, T.Name
 ) 
-SELECT T.TeamId as TeamId, T.Name as Name, T.Wins as Wins, T.GameCount - T.Wins AS Losses, 
+SELECT T.TeamId as TeamId, T.Name as Name, T.OppName as OppName, T.Wins as Wins, T.GameCount - T.Wins AS Losses, 
 	1.0 * T.Wins / T.GameCount AS WinPercentage, 
 	1.0 * T.TotalPoints / T.GameCount AS AveragePoints,
 	1.0 * T.TotalPointsOpp / T.GameCount AS AveragePointsOpp

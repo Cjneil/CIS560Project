@@ -10,16 +10,18 @@ namespace BasketballData.Models
     {
         public int TeamId { get; }
         public string TeamName { get; }
+        public string OppName { get; }
         public int Wins { get; }
         public int Losses { get; }
         public double WinPercentage { get; }
         public double AveragePoints { get; }
         public double AveragePointsOpp { get; }
 
-        internal HistoricalPerformance(int teamId, string name, int wins, int losses, double winPercentage, double averagePoints, double averagePointsOpp)
+        internal HistoricalPerformance(int teamId, string name, string oppName, int wins, int losses, double winPercentage, double averagePoints, double averagePointsOpp)
         {
             TeamId = teamId;
             TeamName = name;
+            OppName = oppName;
             Wins = wins;
             Losses = losses;
             WinPercentage = Math.Round(winPercentage, 2);

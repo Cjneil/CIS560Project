@@ -40,6 +40,7 @@ namespace BasketballData
 
             var teamIdOrdinal = reader.GetOrdinal("teamId");
             var nameOrdinal = reader.GetOrdinal("Name");
+            var oppNameOrdinal = reader.GetOrdinal("OppName");
             var winsOrdinal = reader.GetOrdinal("Wins");
             var lossesOrdinal = reader.GetOrdinal("Losses");
             var percentOrdinal = reader.GetOrdinal("WinPercentage");
@@ -52,6 +53,7 @@ namespace BasketballData
             return new HistoricalPerformance(
                reader.GetInt32(teamIdOrdinal),
                reader.GetString(nameOrdinal),
+               reader.GetString(oppNameOrdinal),
                reader.GetInt32(winsOrdinal),
                reader.GetInt32(lossesOrdinal),
                (double) reader.GetDecimal(percentOrdinal),

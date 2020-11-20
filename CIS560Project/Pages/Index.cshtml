@@ -82,22 +82,24 @@
             @if (Model.Performance != null)
             {
                 <tr>
-                    <th>Team Name</th>
+                    <th>Team</th>
+                    <th>Opponent</th>
                     <th>Wins</th>
                     <th>Losses</th>
                     <th>Win Percentage</th>
                     <th>Average Points</th>
                     <th>Average Points Opponent</th>
                 </tr>
-                    <tr>
-                        <td>@Model.Performance.TeamName</td>
-                        <td>@Model.Performance.Wins</td>
-                        <td>@Model.Performance.Losses</td>
-                        <td>@Model.Performance.WinPercentage</td>
-                        <td>@Model.Performance.AveragePoints</td>
-                        <td>@Model.Performance.AveragePointsOpp</td>
+                <tr>
+                    <td>@Model.Performance.TeamName</td>
+                    <td>@Model.Performance.OppName</td>
+                    <td>@Model.Performance.Wins</td>
+                    <td>@Model.Performance.Losses</td>
+                    <td>@Model.Performance.WinPercentage</td>
+                    <td>@Model.Performance.AveragePoints</td>
+                    <td>@Model.Performance.AveragePointsOpp</td>
 
-                    </tr>
+                </tr>
             }
         </table>
     </div>
