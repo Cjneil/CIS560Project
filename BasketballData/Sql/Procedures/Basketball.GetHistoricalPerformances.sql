@@ -19,7 +19,7 @@ AS
 			AND GT2.TeamId <> GT.TeamId
 		INNER JOIN Basketball.Team O ON GT2.TeamId = O.TeamId
 	WHERE (T.Name = @TeamName1 AND O.Name = @TeamName2)
-	GROUP BY T.TeamId, T.Name
+	GROUP BY T.TeamId, T.Name, O.Name
 ) 
 SELECT T.TeamId as TeamId, T.Name as Name, T.OppName as OppName, T.Wins as Wins, T.GameCount - T.Wins AS Losses, 
 	1.0 * T.Wins / T.GameCount AS WinPercentage, 

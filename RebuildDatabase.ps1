@@ -55,6 +55,7 @@ Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "Basketball
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Procedures\Basketball.RetrieveGames.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Procedures\Basketball.RetrievePlayers.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Procedures\Basketball.RetrieveTeams.sql"
+Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Procedures\Basketball.RetrieveSeasons.sql"
 Invoke-SqlCmd -ServerInstance $Server -Database $Database -InputFile "BasketballData\Sql\Procedures\Basketball.ShowPlayerRecordsLeaderboard.sql"
 
 Write-Host "Inserting data..."

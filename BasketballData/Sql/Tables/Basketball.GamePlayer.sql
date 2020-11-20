@@ -15,7 +15,6 @@ CREATE TABLE Basketball.GamePlayer
     UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 
 	PRIMARY KEY(GameTeamId, PlayerId),
-	FOREIGN KEY(TeamId) REFERENCES Basketball.Player(TeamId),
-	FOREIGN KEY(PlayerId) REFERENCES Basketball.Player(PlayerId),
-	FOREIGN KEY(GameTeamId, TeamId) REFERENCES Basketball.GameTeam(GameTeamId, TeamId)
+	FOREIGN KEY(PlayerId, TeamId) REFERENCES Basketball.Player(PlayerId, TeamId),
+	FOREIGN KEY(GameTeamId, TeamId) REFERENCES Basketball.GameTeam(GameTeamId, TeamId),
 );
