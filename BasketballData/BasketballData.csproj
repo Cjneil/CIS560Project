@@ -51,7 +51,6 @@
     <Compile Include="Interfaces\IGameRepository.cs" />
     <Compile Include="Interfaces\IGameTeamRepository.cs" />
     <Compile Include="Interfaces\IPlayerRepository.cs" />
-    <Compile Include="Interfaces\IReportsRepository.cs" />
     <Compile Include="Interfaces\ISeasonRepository.cs" />
     <Compile Include="Interfaces\ITeamRepository.cs" />
     <Compile Include="Models\Conference.cs" />
@@ -73,7 +72,6 @@
     <Compile Include="Repositories\SqlGameTeamRepository.cs" />
     <Compile Include="Repositories\SqlHistoricalPerformanceRepository.cs" />
     <Compile Include="Repositories\SqlPlayerRepository.cs" />
-    <Compile Include="Repositories\SqlReportsRepository.cs" />
     <Compile Include="Repositories\SqlSeasonRepository.cs" />
     <Compile Include="Repositories\SqlTeamRepository.cs" />
   </ItemGroup>
