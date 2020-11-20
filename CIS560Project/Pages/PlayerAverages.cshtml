@@ -13,13 +13,14 @@
 <form id="menu-database">
     <div id="filters">
         <div>
-        <label>If you would like to search by name, please enter the name below</label>
+            <label>If you would like to search by name, please enter the name below</label>
         </div>
-        
+
         <div id="name-search">
             <label>Name:</label>
             <input type="text" name="SearchTerms" value="@Model.SearchTerms" />
         </div>
+        <input type="submit" name="submitPlayerSearch" value="Search for player" />
     </div>
     <div class="text-center">
         <div class="players">

@@ -15,6 +15,7 @@ namespace CIS560Project.Pages
         /// <summary>
         /// Terms to show items that include
         /// </summary>
+        [BindProperty(SupportsGet = true)]
         public string SearchTerms { get; set; }
 
         public SqlPlayerRepository playerRepository = new SqlPlayerRepository(@"Server=(localdb)\MSSQLLocalDb;Database=560Project;Integrated Security=SSPI;");
