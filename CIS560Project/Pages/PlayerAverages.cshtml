@@ -10,50 +10,48 @@
     On this page you will find information regarding all players in the league regarding their name and position. These can be filtered using the below forms, at this time you can only search you using one of the below options at a time.
     The lowest option filled will be prioritized.
 </p>
+<label>If you would like to search by name, please enter the name below</label>
 <form id="menu-database">
     <div id="filters">
-        <div>
-            <label>If you would like to search by name, please enter the name below</label>
-        </div>
-
-        <div id="name-search">
+        <div id="player-search-averages">
             <label>Name:</label>
             <input type="text" name="SearchTerms" value="@Model.SearchTerms" />
         </div>
         <input type="submit" name="submitPlayerSearch" value="Search for player" />
     </div>
+</form>
     <div class="text-center">
         <div class="players">
-                <h2>Players</h2>
-                <table class="players-list">
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Team</th>
-                        <th>Position</th>
-                        <th>MPG</th>
-                        <th>PPG</th>
-                        <th>APG</th>
-                        <th>RPG</th>
-                        <th>SPG</th>
-                        <th>TPG</th>
+            <h2>Players</h2>
+            <table class="players-list">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>MPG</th>
+                    <th>PPG</th>
+                    <th>APG</th>
+                    <th>RPG</th>
+                    <th>SPG</th>
+                    <th>TPG</th>
+                </tr>
+                @foreach (Player player in @Model.Players)
+                {
+                    <tr class="player-entry">
+                        <td>@player.FirstName</td>
+                        <td>@player.LastName</td>
+                        <td>@player.TeamName</td>
+                        <td>@player.Position</td>
+                        <td>@player.MinutesPerGame</td>
+                        <td>@player.PointsPerGame</td>
+                        <td>@player.AssistsPerGame</td>
+                        <td>@player.ReboundsPerGame</td>
+                        <td>@player.StealsPerGame</td>
+                        <td>@player.TurnoversPerGame</td>
                     </tr>
-                    @foreach (Player player in @Model.Players)
-                    {
-                        <tr class="player-entry">
-                            <td>@player.FirstName</td>
-                            <td>@player.LastName</td>
-                            <td>@player.TeamName</td>
-                            <td>@player.Position</td>
-                            <td>@player.MinutesPerGame</td>
-                            <td>@player.PointsPerGame</td>
-                            <td>@player.AssistsPerGame</td>
-                            <td>@player.ReboundsPerGame</td>
-                            <td>@player.StealsPerGame</td>
-                            <td>@player.TurnoversPerGame</td>
-                        </tr>
-                    }
-                </table>
+                }
+            </table>
         </div>
     </div>
-</form>
+

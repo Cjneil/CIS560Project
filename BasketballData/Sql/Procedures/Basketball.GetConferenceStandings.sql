@@ -26,7 +26,7 @@ AS
 SELECT C.TeamName as TeamName, C.Wins As Wins, C.GameCount - C.Wins AS Losses, 
 	1.0 * C.Wins / C.GameCount AS WinPercentage
 FROM ConferenceCTE C
-ORDER BY WinPercentage DESC
+ORDER BY WinPercentage DESC, Wins DESC
 GO
 
 --EXEC Basketball.GetConferenceStandings @ConferenceNickName = N'Big 12', @YearRange = N'2019-20'

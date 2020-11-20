@@ -6,38 +6,41 @@
 }
 
 <h1 class="display-teaminfo">Player Records</h1>
+<p>On this page you can search the top X amount of players in a conference based on a chosen statistic such as points, rebounds, etc.</p>
 <form id="menu-database">
     <div id="filters">
-        <label>
-            Conference:
-            <select name="conferenceNickname">
-                @foreach (BasketballData.Models.Conference conference in Model.Conferences)
-                {
-                    <option>@conference.Nickname</option>
-                }
-            </select>
-        </label>
+        <div id="name-search">
+            <label>
+                Conference:
+                <select name="conferenceNickname">
+                    @foreach (BasketballData.Models.Conference conference in Model.Conferences)
+                    {
+                        <option>@conference.Nickname</option>
+                    }
+                </select>
+            </label>
 
-        <label>
-            Statistic:
-            <select name="statistic">
-                <option value="Minutes">Minutes</option>
-                <option value="Points">Points</option>
-                <option value="Assists">Assists</option>
-                <option value="Rebounds">Rebounds</option>
-                <option value="Steals">Steals</option>
-                <option value="Blocks">Blocks</option>
-                <option value="Turnovers">Turnovers</option>
-            </select>
-        </label>
+            <label>
+                Statistic:
+                <select name="statistic">
+                    <option value="Minutes">Minutes</option>
+                    <option value="Points">Points</option>
+                    <option value="Assists">Assists</option>
+                    <option value="Rebounds">Rebounds</option>
+                    <option value="Steals">Steals</option>
+                    <option value="Blocks">Blocks</option>
+                    <option value="Turnovers">Turnovers</option>
+                </select>
+            </label>
 
-        <label>
-            How many players would you like to see?
-            <input type="number" name="playerCount" min="0" />
-        </label>
-
+            <label>
+                How many players would you like to see?
+                <input type="number" name="playerCount" min="0" />
+            </label>
+        </div>
         <input type="submit" name="submitTopNPlayers" value="View player records" />
     </div>
+</form>
     <div class="text-center">
 
 
@@ -47,10 +50,10 @@
                 @if (Model.Statistic != null)
                 {
                     <tr>
+                        <th>Rank</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Team</th>
-                        <th>Position</th>
                         <th>@Model.Statistic</th>
                     </tr>
                     int i = 1;
@@ -87,4 +90,4 @@
             </table>
         </div>
     </div>
-</form>
+

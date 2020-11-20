@@ -11,7 +11,7 @@
 </div>
 
 <form>
-    <div>
+    <div id="homepage-container">
         <label>
             Conference:
             <select name="conferenceNickname">
@@ -21,6 +21,8 @@
                     <option value="@conference.Nickname">@conference.Nickname</option>
                 }
             </select>
+        </label>
+        <label>
             Season:
             <select name="seasonChoice">
                 <option></option>
@@ -31,32 +33,37 @@
             </select>
         </label>
 
-        <input type="submit" name="submitConferenceStandings" value="View Conference Standings"/>
+        <input type="submit" name="submitConferenceStandings" value="View Conference Standings" />
+    </div>
         <table class="players-list">
             @if (Model.ConferenceStandings != null)
             {
                 <tr>
+                    <th>Ranking</th>
                     <th>Team Name</th>
                     <th>Wins</th>
                     <th>Losses</th>
                     <th>Win Percentage</th>
                 </tr>
+                int i = 1;
                 @foreach (ConferenceStanding standing in @Model.ConferenceStandings)
                 {
                     <tr>
+                        <td>@i</td>
                         <td>@standing.TeamName</td>
                         <td>@standing.Wins</td>
                         <td>@standing.Losses</td>
                         <td>@standing.WinPercentage</td>
                     </tr>
+                    i++;
                 }
             }
         </table>
 
-    </div>
+    
 </form>
 <form>
-    <div>
+    <div id="homepage-container">
         <label>
             Team 1:
             <select name="team1Name">
@@ -78,6 +85,7 @@
         </label>
 
         <input type="submit" name="submitHeadToHead" value="View Head-to-Head Stats" />
+    </div>
         <table>
             @if (Model.Performance != null)
             {
@@ -102,27 +110,28 @@
                 </tr>
             }
         </table>
-    </div>
+    
 </form>
 <form>
-    <div>
+    <div id="homepage-container">
         <label>
             First Name:
-            <input type="text" name="playerFirstName"/>
+            <input type="text" name="playerFirstName" />
         </label>
         <label>
             Last Name:
-            <input type="text" name="playerLastName"/>
+            <input type="text" name="playerLastName" />
         </label>
         <label>
             Start Date:
-            <input type="date" name="startDate"/>
+            <input type="date" name="startDate" />
         </label>
         <label>
             End Date:
-            <input type="date" name="endDate"/>
+            <input type="date" name="endDate" />
         </label>
         <input type="submit" name="submitPlayerStats" value="View Player Stats" />
+    </div>
         <table class="players-list">
             @if (Model.PlayerStats != null)
             {
@@ -155,5 +164,5 @@
                 }
             }
         </table>
-    </div>
+    
 </form>

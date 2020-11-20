@@ -9,17 +9,22 @@
 <form id="menu-database">
     <div id="filters">
         <div>
-            <label>This page can be used to search for a player's game history</label>
+            <label>This page can be used to search for a player's game history. Simply enter the name of the player you would like to search </label>
         </div>
 
         <div id="name-search">
-            <label>First Name:</label>
-            <input type="text" name="firstName" />
-            <label>Last Name:</label>
-            <input type="text" name="lastName" />
+            <div>
+                <label>First Name:</label>
+                <input type="text" name="firstName" />
+            </div>
+            <div>
+                <label>Last Name:</label>
+                <input type="text" name="lastName" />
+            </div>
         </div>
         <input type="submit" name="submitPlayerSearch" value="Search for player" />
     </div>
+</form>
     <div class="text-center">
         <div class="records">
 
@@ -59,4 +64,4 @@
             }
         </div>
     </div>
-</form>
+
